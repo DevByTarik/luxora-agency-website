@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luxora — Premium Digital Services</title>
+  <meta name="description" content="Luxora — premium digital services. Web design, brand strategy, high-end product experiences." />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Favicon (simple SVG data URL) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23000000'/%3E%3Cpath d='M12 12h24v24H12z' fill='%23b8903f'/%3E%3C/svg%3E" />
+  <style>
+    /* ---------------------------
+       Palette & Base
+       --------------------------- */
+    :root{
+      --bg:#060606;
+      --panel:#0f0f0f;
+      --muted:#aaaaaa;
+      --gold:#b8903f;
+      --white:#ffffff;
+      --glass: rgba(255,255,255,0.04);
+      --radius:20px;
+      --gap: clamp(1rem, 2vw, 2.5rem);
+      --container: min(1200px, 92%);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg) 0%, #050505 100%);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+
+    /* Utility container */
+    .wrap{max-width:var(--container);margin:0 auto;padding: calc(var(--gap) * 0.75) 1rem;}
+
+    /* ---------------------------
+       Navbar
+       --------------------------- */
+    header{
+      position:fixed;
+      left:0;right:0;
+      top:0;
+      z-index:999;
+      transition: background 350ms ease, color 350ms ease, box-shadow 350ms ease, transform 300ms ease;
+      backdrop-filter: blur(6px);
+    }
+    .nav{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.9rem 0;
+    }
+    .brand{
+      display:flex;
+      gap:.8rem;
+      align-items:center;
+      text-decoration:none;
+      color:var(--white);
+    }
+    .brand .logo{
+      width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#9a7a2f);
+      box-shadow: 0 6px 18px rgba(184,144,63,0.12);
+      display:grid;place-items:center;font-weight:700;font-family:"Playfair Display",serif;color:#070707;
+    }
+    .brand .title{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size:1.05rem;
+      letter-spacing:0.6px;
+    }
+    nav ul{display:flex;gap:1.2rem;list-style:none;padding:0;margin:0;align-items:center;}
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.95rem;
+      padding:8px 10px;border-radius:8px;transition: color 250ms, background 250ms, transform 220ms;
+    }
+    nav a:hover{color:var(--white);transform:translateY(-2px)}
+    .cta{
+      padding:.6rem .95rem;border-radius:12px;background:transparent;border:1px solid rgba(184,144,63,0.14);font-weight:700;color:var(--gold)
+    }
+
+    /* scrolled state */
+    header.scrolled{
+      background: linear-gradient(180deg, rgba(10,10,10,0.6), rgba(10,10,10,0.42));
+      box-shadow: 0 6px 26px rgba(0,0,0,0.6);
+      transform: translateY(0);
+    }
+
+    /* ---------------------------
+       Hero
+       --------------------------- */
+    .hero{
+      min-height:calc(100vh - 72px);
+      display:grid;
+      grid-template-columns: 1fr;
+      align-items:center;
+      gap:var(--gap);
+      padding-top:78px;
+      padding-bottom: clamp(2rem, 6vh, 6rem);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.8fr;
+      gap: clamp(1.2rem, 3vw, 3rem);
+      align-items:center;
+    }
+    .hero-left{
+      padding: clamp(1rem, 2.6vw, 2.5rem);
+    }
+    .eyebrow{
+      color:var(--muted);
+      text-transform:uppercase;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:0.78rem;
+    }
+    .headline{
+      font-family:"Playfair Display", serif;
+      font-weight:900;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      line-height:0.95;
+      margin: .5rem 0 0.6rem 0;
+      letter-spacing:-1px;
+      color:var(--white);
+      overflow:visible;
+    }
+    .headline .word{display:inline-block;will-change:transform,opacity}
+    .sub{
+      color:var(--muted);
+      font-size:1.05rem;margin-top:1rem;max-width:60ch;
+    }
+    .hero-cta{margin-top:1.6rem;display:flex;gap:1rem;align-items:center}
+    .btn{
+      padding: .75rem 1.15rem;border-radius:12px;font-weight:700;border:1px solid rgba(255,255,255,0.06);
+      background:transparent;color:var(--white);cursor:pointer;transition:transform 220ms ease, box-shadow 220ms ease;
+    }
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(184,144,63,0.13), rgba(184,144,63,0.06));
+      border: 1px solid rgba(184,144,63,0.9);
+      color:var(--gold);
+      box-shadow: 0 10px 30px rgba(184,144,63,0.06), inset 0 -2px 6px rgba(0,0,0,0.25);
+    }
+    .btn:hover{transform:translateY(-4px)}
+
+    /* hero visual card */
+    .hero-right{
+      display:grid;
+      gap:1rem;
+      align-items:start;
+    }
+    .visual-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      border-radius:18px;
+      padding:1.1rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      overflow:hidden;
+    }
+    .stat{
+      display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    }
+    .stat h3{margin:0;font-family:"Playfair Display";font-weight:700;font-size:1.35rem;color:var(--white)}
+    .stat p{margin:0;color:var(--muted);font-size:.95rem}
+
+    /* ---------------------------
+       Services
+       --------------------------- */
+    .section-title{
+      display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;
+    }
+    .section-title h2{font-family:"Playfair Display";margin:0;font-size:1.5rem}
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1.3rem;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;padding:1.4rem;border:1px solid rgba(255,255,255,0.03);
+      transition: transform 420ms cubic-bezier(.19,1,.22,1), box-shadow 320ms, border-color 320ms;
+      cursor:pointer;overflow:hidden;
+    }
+    .card:hover{
+      transform: translateY(-12px) scale(1.01);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 2px 10px rgba(184,144,63,0.04);
+      border-color: rgba(184,144,63,0.18);
+    }
+    .card .kicker{font-weight:700;color:var(--gold);font-size:.9rem;margin-bottom:.6rem}
+    .card h3{margin:0;font-family:"Playfair Display";font-size:1.2rem}
+    .card p{color:var(--muted);margin-top:.6rem;font-size:.95rem}
+
+    /* hover image accent */
+    .card .accent{
+      position:absolute;right:14px;top:14px;opacity:0.06;font-size:5.4rem;pointer-events:none;
+      transform:rotate(-12deg);
+    }
+
+    /* ---------------------------
+       About w/ parallax
+       --------------------------- */
+    .about{
+      display:grid;grid-template-columns: 1fr 1fr;gap:var(--gap);align-items:center;padding:2.3rem 0;
+      position:relative;overflow:visible;
+    }
+    .about-visual{
+      height:360px;border-radius:20px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.03);
+      background:linear-gradient(180deg, rgba(184,144,63,0.06), rgba(255,255,255,0.01));
+      display:flex;align-items:center;justify-content:center;
+    }
+    .about-visual .layer{
+      position:absolute;inset:0;background-image:linear-gradient(120deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));
+      transform-origin:center;
+    }
+    .about-text h3{font-family:"Playfair Display";font-size:1.8rem;margin:0 0 0.6rem 0}
+    .about-text p{color:var(--muted);font-size:1rem}
+
+    /* ---------------------------
+       Contact
+       --------------------------- */
+    .contact{
+      padding:2.2rem 0;
+      display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-items:start;
+    }
+    form{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:16px;padding:1.3rem;border:1px solid rgba(255,255,255,0.03);
+    }
+    .field{
+      position:relative;margin-bottom:1rem;
+    }
+    .field input, .field textarea{
+      width:100%;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:14px 14px;border-radius:10px;color:var(--white);
+      outline:none;font-size:0.98rem;transition: box-shadow 200ms, border-color 200ms, transform 200ms;
+    }
+    .field label{
+      position:absolute;left:14px;top:12px;color:var(--muted);pointer-events:none;transition: transform 180ms, font-size 180ms, top 180ms;
+      font-size:0.95rem;
+    }
+    .field input:focus, .field textarea:focus{
+      box-shadow: 0 8px 30px rgba(184,144,63,0.06);
+      border-color: rgba(184,144,63,0.5);
+    }
+    .field input:focus + label, .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label {
+      transform: translateY(-14px) scale(.86);
+      top:8px;color:var(--gold);
+    }
+    .submit{
+      margin-top:0.8rem;padding:.75rem 1.1rem;border-radius:12px;border:0;background:linear-gradient(90deg, rgba(184,144,63,0.95), rgba(144,110,39,0.95));color:#070707;font-weight:800;cursor:pointer;
+      box-shadow: 0 10px 34px rgba(184,144,63,0.12);
+    }
+    .contact-info{
+      color:var(--muted);font-size:0.98rem;padding:1.4rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
+    }
+
+    /* ---------------------------
+       Footer
+       --------------------------- */
+    footer{padding:2.4rem 0;color:var(--muted);font-size:.95rem;border-top:1px solid rgba(255,255,255,0.02)}
+
+    /* ---------------------------
+       Responsive
+       --------------------------- */
+    @media (max-width:1000px){
+      .hero-grid{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+    }
+    @media (max-width:620px){
+      nav ul{display:none}
+      .brand .title{font-size:0.95rem}
+      .services{grid-template-columns:1fr}
+    }
+
+    /* ---------------------------
+       Reduced motion
+       --------------------------- */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header id="siteHeader" aria-hidden="false">
+    <div class="wrap nav">
+      <a class="brand" href="#">
+        <div class="logo">L</div>
+        <div class="title">Luxora</div>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="cta" href="#contact">Start Project</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero wrap" id="home" aria-label="Intro">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">Premium Digital Experiences</div>
+          <h1 class="headline" aria-hidden="false">
+            <!-- headline words for GSAP stagger reveal -->
+            <span class="word">Design</span>&nbsp;
+            <span class="word">that</span>&nbsp;
+            <span class="word">commands</span>&nbsp;
+            <span class="word">attention.</span>
+          </h1>
+          <p class="sub">We craft exquisite websites and brand systems that elevate perception and convert discerning visitors into loyal customers. Luxury-first approach, measurable results.</p>
+          <div class="hero-cta">
+            <button class="btn primary" id="startBtn">Start a Project</button>
+            <button class="btn" id="learnBtn">View Services</button>
+          </div>
+        </div>
+
+        <div class="hero-right" aria-hidden="false">
+          <div class="visual-card" id="visualCard" role="region" aria-label="brand metrics">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+              <div>
+                <h3>Craft & Strategy</h3>
+                <p style="margin:0;color:var(--muted)">Design systems, UX audits, and product strategy.</p>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:800;font-size:1.3rem;color:var(--gold)">+36%</div>
+                <div style="color:var(--muted);font-size:.88rem">Avg. Engagement</div>
+              </div>
+            </div>
+            <div class="stat" style="margin-top:1rem">
+              <div>
+                <p style="color:var(--muted);margin:0">Recent launches</p>
+                <h3 style="font-size:1.05rem">River & Stone</h3>
+              </div>
+              <div style="text-align:right">
+                <p style="color:var(--muted);margin:0">AOV uplift</p>
+                <h3 style="font-size:1.05rem">+22%</h3>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:.9rem">
+            <div class="visual-card" style="flex:1;min-height:100px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Playfair Display';font-weight:700;font-size:1.1rem">Bespoke</div>
+                <div style="color:var(--muted)">Tailored solutions for premium brands</div>
+              </div>
+            </div>
+            <div class="visual-card" style="width:120px;min-height:100px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-size:1.05rem;font-weight:800;color:var(--gold)">L</div>
+                <div style="color:var(--muted);font-size:.85rem">Signature</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="wrap" aria-labelledby="servicesTitle" style="padding-top:1.6rem;padding-bottom:1.6rem;">
+      <div class="section-title">
+        <h2 id="servicesTitle">Services</h2>
+        <div style="margin-left:auto;color:var(--muted)">Selected offerings crafted for prestige brands</div>
+      </div>
+
+      <div class="services" id="servicesGrid">
+        <div class="card" tabindex="0" role="article" aria-label="Brand Identity">
+          <div class="kicker">Brand Identity</div>
+          <h3>Timeless systems & positioning</h3>
+          <p>Logo design, visual language, voice and brand guidelines for longevity.</p>
+          <div class="accent">B</div>
+        </div>
+
+        <div class="card" tabindex="0" role="article" aria-label="Web Design">
+          <div class="kicker">Web Experience</div>
+          <h3>High-converting, pixel-perfect sites</h3>
+          <p>Luxury UX, astonishing visuals, and performance-optimized builds.</p>
+          <div class="accent">W</div>
+        </div>
+
+        <div class="card" tabindex="0" role="article" aria-label="Product Design">
+          <div class="kicker">Product Design</div>
+          <h3>Product-market fit & interaction design</h3>
+          <p>From concept to interactive prototypes to production-ready specs.</p>
+          <div class="accent">P</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About with Parallax -->
+    <section id="about" class="wrap about" aria-label="About Luxora">
+      <div class="about-visual" id="aboutVisual" aria-hidden="true">
+        <!-- layered shapes for parallax -->
+        <div class="layer" id="layerBack" style="background:
+          radial-gradient(600px 300px at 10% 20%, rgba(184,144,63,0.06), transparent 14%),
+          radial-gradient(600px 300px at 90% 80%, rgba(255,255,255,0.02), transparent 10%);"></div>
+        <svg width="100%" height="100%" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" style="position:relative;z-index:2">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#000" stop-opacity="0.02"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0.00"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#g1)"></rect>
+          <g fill="none" stroke="rgba(184,144,63,0.06)" stroke-width="2">
+            <path d="M60 300 C120 220, 240 220, 300 300 S420 380, 540 300" />
+            <path d="M30 250 C120 180, 240 200, 360 240 S420 270, 540 240" />
+          </g>
+        </svg>
+        <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:center;height:100%">
+          <div style="text-align:center;max-width:70%">
+            <div style="font-family:'Playfair Display';font-size:1.6rem;font-weight:700">We design for attention and retention</div>
+            <div style="color:var(--muted);margin-top:.6rem">Our process marries refined aesthetics with measurable growth — strategy first, polish second.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <h3>About Luxora</h3>
+        <p>Luxora is a studio focused on high-end digital products and brand experiences. We partner with founders and creative directors who value craft, clarity, and long-term brand equity. Our team blends strategy, design, and engineering to deliver products that feel expensive — and perform.</p>
+        <p style="margin-top:1rem;color:var(--muted)">We measure success by uplift: engagement, conversion, and customer retention. Every detail matters — from typography scale to micro-interactions.</p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="wrap contact" aria-labelledby="contactTitle">
+      <div>
+        <h2 id="contactTitle">Start a Project</h2>
+        <p style="color:var(--muted);margin-top:.4rem">Tell us about your project. We'll reply within 2 business days. For urgent inquiries, email hello@luxora.example</p>
+
+        <form id="contactForm" autocomplete="on" novalidate>
+          <div class="field">
+            <input type="text" id="name" name="name" required placeholder=" " />
+            <label for="name">Full name</label>
+          </div>
+          <div class="field">
+            <input type="email" id="email" name="email" required placeholder=" " />
+            <label for="email">Email</label>
+          </div>
+          <div class="field">
+            <input type="text" id="company" name="company" placeholder=" " />
+            <label for="company">Company (optional)</label>
+          </div>
+          <div class="field">
+            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+            <label for="message">Tell us about your goals</label>
+          </div>
+
+          <button class="submit" type="submit">Send message</button>
+        </form>
+      </div>
+
+      <aside class="contact-info" aria-label="contact information">
+        <div style="font-weight:700;font-family:'Playfair Display'">Let's build something remarkable</div>
+        <div style="margin-top:0.8rem;color:var(--muted)">Studio: Sarajevo — remote worldwide</div>
+
+        <div style="margin-top:1.6rem">
+          <div style="display:flex;gap:.75rem;align-items:center;margin-bottom:.5rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zm0 6l10 5-10 5-10-5 10-5z" stroke="rgba(184,144,63,0.9)" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            <div><strong>Email</strong><div style="color:var(--muted)">hello@luxora.example</div></div>
+          </div>
+
+          <div style="display:flex;gap:.75rem;align-items:center;margin-bottom:.5rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 8v11a2 2 0 0 0 2 2h14" stroke="rgba(184,144,63,0.9)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Phone</strong><div style="color:var(--muted)">+387 61 000 000</div></div>
+          </div>
+
+          <div style="display:flex;gap:.75rem;align-items:center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11z" stroke="rgba(184,144,63,0.9)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Timezone</strong><div style="color:var(--muted)">Europe/Sarajevo</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.6rem;color:var(--muted);font-size:.9rem">Interested in a retainer or one-off sprint? We provide both. Tell us your timeline and budget and we'll propose a plan.</div>
+      </aside>
+    </section>
+
+    <footer class="wrap" role="contentinfo">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div>&copy; <strong>Luxora</strong> <span id="year"></span> — Crafted with intention.</div>
+        <div style="color:var(--muted)">Made with care • Privacy • Terms</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Scripts: GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-DKfUdDk3xq0X8Ivn+3q5qZ0cZ5y6W6zq2gk8lGg4QSPkQnGqYjK1b6XwI9qQzqjUoD7n0z2kJqzq6pVjv5s0w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-1d3w+Fq2Eol3y1WTTmRrXqO8iKZQ+vG2gA1yz3Jq5x4y30k9qg9R4xYk4bJqS1VfGZJYqZj2l8wW6o3bFq2K8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // -------------------------------
+    // Luxora Interactive Animations
+    // -------------------------------
+    (function(){
+      // Basic helpers
+      const $ = selector => document.querySelector(selector);
+      const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+      // Inject current year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Header scroll behavior: add .scrolled after threshold
+      const header = $('#siteHeader');
+      const scrollThreshold = 50;
+      const onScrollHeader = () => {
+        if(window.scrollY > scrollThreshold) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      };
+      onScrollHeader();
+      window.addEventListener('scroll', onScrollHeader, {passive:true});
+
+      // GSAP Setup
+      if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero headline stagger reveal
+        const words = $$('.headline .word');
+        gsap.from(words, {
+          y: 30,
+          opacity: 0,
+          stagger: 0.12,
+          ease: 'power3.out',
+          duration: 0.9,
+          delay: 0.15
+        });
+
+        // Visual card subtle lift on load
+        gsap.from('#visualCard', {y:20, opacity:0, duration:1.1, ease:'power3.out', delay:0.35});
+
+        // Services: fade-up when in viewport
+        $$('.card').forEach((card, i) => {
+          gsap.from(card, {
+            y: 28,
+            opacity: 0,
+            duration: 0.9,
+            ease: 'power3.out',
+            delay: 0.12 + i * 0.08,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+
+          // micro hover tilt (subtle)
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const tx = (e.clientX - rect.left) / rect.width - 0.5;
+            const ty = (e.clientY - rect.top) / rect.height - 0.5;
+            gsap.to(card, {rotationX: ty * 3, rotationY: tx * 6, transformOrigin:'center', duration:0.6, ease:'power3.out'});
+          });
+          card.addEventListener('mouseleave', () => gsap.to(card, {rotationX:0, rotationY:0, duration:0.6, ease:'power3.out'}));
+        });
+
+        // About parallax layers
+        gsap.to('#layerBack', {
+          y: 60,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#about',
+            scrub: 0.7,
+            start: 'top bottom',
+            end: 'bottom top'
+          }
+        });
+
+        // Fade-in sections general
+        gsap.utils.toArray('section').forEach(section => {
+          gsap.from(section, {
+            opacity: 0,
+            y: 18,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+        });
+
+        // Contact form field focus animations (label lift already CSS; micro bounce on focus)
+        $$('.field input, .field textarea').forEach(el => {
+          el.addEventListener('focus', () => {
+            gsap.fromTo(el, {scale:1.01}, {scale:1, duration:0.5, ease:'elastic.out(1,0.5)'});
+          });
+        });
+
+        // Smooth scroll for navbar links
+        $$('.nav a[href^="#"], .btn[href^="#"]').forEach(a => {
+          a.addEventListener('click', (e) => {
+            const href = a.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              gsap.to(window, {scrollTo: target, duration:0.9, ease:'power2.inOut', offset: -20});
+            }
+          });
+        });
+
+        // If ScrollToPlugin not available, fallback to native behavior
+        if (!gsap.plugins.scrollTo) {
+          // simple fallback: use element.scrollIntoView
+          $$('.nav a[href^="#"], .btn[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+              const href = a.getAttribute('href');
+              if (!href || !href.startsWith('#')) return;
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({behavior:'smooth', block:'start'});
+              }
+            });
+          });
+        }
+
+      } else {
+        // If GSAP not present, minimal CSS fallback for headline
+        console.warn('GSAP not loaded — fallback animations applied.');
+        document.querySelectorAll('.headline .word').forEach((w,i) => {
+          w.style.opacity = 1;
+          w.style.transform = 'none';
+        });
+      }
+
+      // Contact form handling (demo only)
+      const form = $('#contactForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // basic validation
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+        if (!name || !email || !message) {
+          // subtle shake to indicate error
+          gsap.fromTo(form, {x:-6},{x:6,duration:0.06,repeat:3,yoyo:true,ease:'power1.inOut'});
+          return;
+        }
+        // simulated send
+        const submitBtn = form.querySelector('.submit');
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+
+        // Simulate network with timeout (replace with real API call)
+        setTimeout(() => {
+          submitBtn.textContent = 'Sent';
+          gsap.fromTo(form, {opacity:0.92, scale:0.996},{opacity:1, scale:1, duration:0.6, ease:'power2.out'});
+          form.reset();
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }, 1400);
+        }, 900);
+      });
+
+      // Small accessibility: allow keyboard reveal for cards
+      $$('.card').forEach(card => {
+        card.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+    })();
+  </script>
+  <!-- End -->
+</body>
+</html>
