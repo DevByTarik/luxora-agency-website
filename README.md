@@ -3,7 +3,7 @@
 High-end agency landing page designed for luxury brands and premium digital products.  
 Focus on refined aesthetics, smooth animations, and conversion-oriented layout.
 
-🔗 **Live demo:** luxora-agency-website.netlify.app
+🔗 **Live demo:** https:/luxora-agency-website.netlify.app
 
 ---
 
